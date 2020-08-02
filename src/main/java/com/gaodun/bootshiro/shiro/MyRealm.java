@@ -1,13 +1,20 @@
 package com.gaodun.bootshiro.shiro;
 
-import org.apache.catalina.User;
+import com.gaodun.bootshiro.entity.User;
+import com.gaodun.bootshiro.service.Impl.UserServiceImpl;
+import com.gaodun.bootshiro.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 public class MyRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserService userService;
+
 
     /**
      * 执行授权逻辑
@@ -27,13 +34,12 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        String userName = "shenxb";
-        String password = "root";
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        if (!token.getUsername().equals(userName)) {
+        User user = userService.findByName(token.getUsername());
+        if (user == null) {
             return null;
         }
         //第一个参数：返回login方法的数据
-        return new SimpleAuthenticationInfo("", password, "");
+        return new SimpleAuthenticationInfo("", user.getPassword(), "");
     }
 }
