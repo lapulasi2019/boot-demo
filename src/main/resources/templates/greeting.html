@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>test thymeleaf</title>
+</head>
+<body>
+<!--/*@thymesVar id="name" type="ch"*/-->
+    <p th:text="'hello ' + ${name} +'!'"/>
+
+    <a href="/add">用户添加</a>
+    <a href="/update">用户更新</a>
+</body>
+</html>
