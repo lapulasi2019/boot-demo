@@ -1,5 +1,6 @@
 package com.gaodun.bootshiro.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,7 +31,13 @@ public class ShiroConfig {
         filterMap.put("/update", "authc");
         filterMap.put("/greeting", "anon");
         filterMap.put("/login", "anon");
+
+        //未授权拦截
+        filterMap.put("/add", "perms[user:add]");
+        filterMap.put("/update", "perms[user:update]");
+        //未授权跳转页面
         shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
@@ -45,5 +52,10 @@ public class ShiroConfig {
     @Bean(name = "myRealm")
     public MyRealm getMyRealm() {
         return new MyRealm();
+    }
+
+    @Bean
+    public ShiroDialect getShiroDialect() {
+        return new ShiroDialect();
     }
 }

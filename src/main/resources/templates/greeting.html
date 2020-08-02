@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>test thymeleaf</title>
@@ -8,7 +8,14 @@
 <!--/*@thymesVar id="name" type="ch"*/-->
     <p th:text="'hello ' + ${name} +'!'"/>
 
+<div shiro:hasPermission="user:add">
     <a href="/add">用户添加</a>
+</div>
+
+<div shiro:hasPermission="user:update">
     <a href="/update">用户更新</a>
+</div>
+<a href="/login">登录</a>
+
 </body>
 </html>

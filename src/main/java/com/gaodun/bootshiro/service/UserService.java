@@ -5,4 +5,6 @@ import com.gaodun.bootshiro.entity.User;
 public interface UserService {
 
     User findByName(String name);
+
+    User findById(Integer id);
 }

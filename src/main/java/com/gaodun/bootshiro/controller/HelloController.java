@@ -37,6 +37,11 @@ public class HelloController {
         }
     }
 
+    @GetMapping("/noAuth")
+    public String noAuth() {
+        return "noAuth";
+    }
+
     @GetMapping("/greeting")
     public String thymeleaf(@RequestParam(name = "name", required = false, defaultValue = "world") String name, Model model) {
         model.addAttribute("name", name);
