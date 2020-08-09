@@ -29,8 +29,7 @@ public class MyRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authenticationInfo = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
         User user = (User)subject.getPrincipal();
-        User dbUser = userService.findById(user.getId());
-        authenticationInfo.addStringPermission(dbUser.getPerms());
+        authenticationInfo.addStringPermission(user.getPerms());
         return authenticationInfo;
     }
 

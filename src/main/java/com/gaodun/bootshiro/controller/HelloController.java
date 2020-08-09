@@ -27,7 +27,8 @@ public class HelloController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
-            return "/greeting";
+            //重定向传递参数
+            return "redirect:greeting?name=" + username;
         } catch (UnknownAccountException e) {
             model.addAttribute("msg", "用戶名不存在");
             return "/login";
